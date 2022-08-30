@@ -20,7 +20,7 @@ def create_user():
         'email': request.form['email']
     }
     show_user = User.create(data)
-    return redirect(f'/read/{show_user}')
+    return redirect(f'/read/{show_user}') #the user.create(data) is grabbing the info, making into a variable we can use it in the redirect
 
 @app.route('/read/<int:id>') #this is to read one users info
 def one_user(id):
