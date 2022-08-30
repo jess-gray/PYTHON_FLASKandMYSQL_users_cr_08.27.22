@@ -19,8 +19,8 @@ def create_user():
         'last_name': request.form['last_name'],
         'email': request.form['email']
     }
-    User.create(data)
-    return redirect('users/new')
+    show_user = User.create(data)
+    return redirect(f'/read/{show_user}')
 
 @app.route('/read/<int:id>') #this is to read one users info
 def one_user(id):
