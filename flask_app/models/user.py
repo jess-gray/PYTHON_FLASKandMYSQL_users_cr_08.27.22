@@ -1,4 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask import flash 
+import re
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
 class User:
     def __init__(self,data):
@@ -46,3 +49,19 @@ class User:
         results = connectToMySQL('cd_users').query_db(query, data)
         print(results)
         return results
+    
+    @staticmethod #this is to validate 
+    def validate_create(reqForm):
+        is_valid = True
+        if len(reqForm['first_name']) < 2:
+            flash('User first name is too short!')
+            is_valid = False
+        if len(reqForm['last_name']) < 2:
+            flash('User last name is too short!')
+            is_valid = False
+        if not EMAIL_REGEX.match(reqForm['email']):
+            flash('Invalid email address')
+            is_valid = False
+        return is_valid
+
+#Need to add valadation for email 

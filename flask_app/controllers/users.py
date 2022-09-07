@@ -14,6 +14,8 @@ def route():
 @app.route('/new_user', methods = ["POST"]) #this is actually adding the new user
 def create_user():
     print(request.form)
+    if not User.validate_create(request.form): #this is validating info
+        return redirect ('/users')
     data = {
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
