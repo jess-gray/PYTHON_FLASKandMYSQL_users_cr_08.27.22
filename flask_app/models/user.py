@@ -59,9 +59,8 @@ class User:
         if len(reqForm['last_name']) < 2:
             flash('User last name is too short!')
             is_valid = False
-        if not EMAIL_REGEX.match(reqForm['email']):
+        if not EMAIL_REGEX.match(reqForm['email']): #make sure import re/REGEX is added for this to work 
             flash('Invalid email address')
             is_valid = False
         return is_valid
 
-#Need to add valadation for email 
